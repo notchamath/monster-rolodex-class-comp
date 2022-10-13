@@ -1,6 +1,5 @@
 import {Component} from 'react';
 
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component{
@@ -31,6 +30,15 @@ class App extends Component{
       });
   }
 
+
+  onSearchChange = (event) => {
+    const searchField = event.target.value.toLocaleLowerCase();
+    
+    this.setState(() => {
+      return {searchField};
+    });
+  }
+
   render() {
 
     const filteredMonsters = this.state.monsters.filter((monster) => {
@@ -40,15 +48,7 @@ class App extends Component{
     return (
       <div className="App">
         
-       <input type="search" className='search-box' placeholder='search monsters' onChange={
-         (event) => {
-          const searchField = event.target.value.toLocaleLowerCase();
-          
-          this.setState(() => {
-            return {searchField};
-          })
-        }
-       }/>
+       <input type="search" className='search-box' placeholder='search monsters' onChange={this.onSearchChange}/>
 
         {
           filteredMonsters.map(monster => {
